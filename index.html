@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Simple SRC Simulator</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/codemirror.css">
+    <link rel="stylesheet" href="assets/css/Footer-Basic.css">
+    <link rel="stylesheet" href="assets/css/materialize.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h3>SRC Simulator</h3>
+        <hr>
+        <div class="row text-center">
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Registers</h4>
+                        <h6 class="text-muted card-subtitle mb-2">General Purpose</h6>
+                        <hr>
+    <table class="striped highlight centered" style="overflow-y:scroll;
+height:200px;max-height:300px">
+        <thead>
+            <tr>
+                <th>Register</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>PC</td>
+                <td id="pc">0</td>
+            </tr>
+            <tr>
+                <td>IR</td>
+                <td id="ir">0</td>
+            </tr>
+            <tr>
+                <td>R0</td>
+                <td id="r0">0</td>
+            </tr>
+            <tr>
+                <td>R1</td>
+                <td id="r1">0</td>
+            </tr>
+            <tr>
+                <td>R2</td>
+                <td id="r2">0</td>
+            </tr>
+            <tr>
+                <td>R3</td>
+                <td id="r3">0</td>
+            </tr>
+            <tr>
+                <td>R4</td>
+                <td id="r4">0</td>
+            </tr>
+            <tr>
+                <td>R5</td>
+                <td id="r5">0</td>
+            </tr>
+            <tr>
+                <td>R6</td>
+                <td id="r6">0</td>
+            </tr>
+            <tr>
+                <td>R7</td>
+                <td id="r7">0</td>
+            </tr>
+            <tr>
+                <td>R8</td>
+                <td id="r8">0</td>
+            </tr>
+            <tr>
+                <td>R9</td>
+                <td id="r9">0</td>
+            </tr>
+            <tr>
+                <td>R10</td>
+                <td id="r10">0</td>
+            </tr>
+            <tr>
+                <td>R11</td>
+                <td id="r11">0</td>
+            </tr>
+            <tr>
+                <td>R12</td>
+                <td id="r12">0</td>
+            </tr>
+            <tr>
+                <td>R13</td>
+                <td id="r13">0</td>
+            </tr>
+            <tr>
+                <td>R14</td>
+                <td id="r14">0</td>
+            </tr>
+            <tr>
+                <td>R15</td>
+                <td id="r15">0</td>
+            </tr>
+            <tr>
+                <td>R16</td>
+                <td id="r16">0</td>
+            </tr>
+            <tr>
+                <td>R17</td>
+                <td id="r17">0</td>
+            </tr>
+            <tr>
+                <td>R18</td>
+                <td id="r18">0</td>
+            </tr>
+            <tr>
+                <td>R19</td>
+                <td id="r19">0</td>
+            </tr>
+            <tr>
+                <td>R20</td>
+                <td id="r20">0</td>
+            </tr>
+            <tr>
+                <td>R21</td>
+                <td id="r21">0</td>
+            </tr>
+            <tr>
+                <td>R22</td>
+                <td id="r22">0</td>
+            </tr>
+            <tr>
+                <td>R23</td>
+                <td id="r23">0</td>
+            </tr>
+            <tr>
+                <td>R24</td>
+                <td id="r24">0</td>
+            </tr>
+            <tr>
+                <td>R25</td>
+                <td id="r25">0</td>
+            </tr>
+            <tr>
+                <td>R26</td>
+                <td id="r26">0</td>
+            </tr>
+            <tr>
+                <td>R27</td>
+                <td id="r27">0</td>
+            </tr>
+            <tr>
+                <td>R28</td>
+                <td id="r28">0</td>
+            </tr>
+            <tr>
+                <td>R29</td>
+                <td id="r29">0</td>
+            </tr>
+            <tr>
+                <td>R30</td>
+                <td id="r30">0</td>
+            </tr>
+            <tr>
+                <td>R31</td>
+                <td id="r31">0</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Assembly</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Code</h6>
+                        <hr>
+                        <div class="text-left"><textarea class="codemirror-textarea" style="height:55vh"></textarea></div>
+                    </div>
+                </div><button class="btn btn-primary" onclick="executeAssembly()" type="button">Execute</button></div>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">Outlog</h4>
+                        <h6 class="text-muted card-subtitle mb-2">Step by Step output</h6>
+                        <hr>
+                        <div class="text-left"><textarea class="codemirror-textarea-output"></textarea></div>
+                    </div>
+                </div><button class="btn btn-primary" onclick="resetSimulator()" type="button">Reset</button></div>
+        </div>
+        <div class="card">
+            <div class="card-body text-center">
+                <h4 class="card-title">SRC Cheat Sheet</h4>
+                <h6 class="text-muted card-subtitle mb-2">Supported Command list</h6><table class="striped highlight centered" style="overflow-y:scroll;
+height:200px;max-height:300px">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>OPCode</th>
+                <th>Usage</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>LD</td>
+                <td>1</td>
+                <td>LD R1,3 <br> LD R1,3(R2)</td>
+                <td>Loads R1 with the value at memory address 3 <br> Loads R1 with the value at memory address M[R2 + 3]</td>
+            </tr>
+            <tr>
+                <td>LDR</td>
+                <td>2</td>
+                <td>LDR R1,3</td>
+                <td>Loads R1 with the content in memory 3 forward relative to the PC M[PC+3]</td>
+            </tr>
+            <tr>
+                <td>LA</td>
+                <td>5</td>
+                <td>LA R7,10</td>
+                <td>Loads 10 (constant) into R7</td>
+            </tr>
+            <tr>
+                <td>LAR</td>
+                <td>6</td>
+                <td>LAR R1,2</td>
+                <td>Loads the address of PC + 2 (constant) into R1</td>
+            </tr>
+            <tr>
+                <td>ST</td>
+                <td>3</td>
+                <td>ST R1,3 <br> ST R1,3(R2)</td>
+                <td>Stores the value of R1 in M[3] <br> stores the value of R1 in M[R2 + 3]</td>
+            </tr>
+            <tr>
+                <td>STR</td>
+                <td>4</td>
+                <td>STR R1,3</td>
+                <td>Stores the value of R1 in M[3+PC]</td>
+            </tr>
+            <tr>
+                <td>BR</td>
+                <td>8</td>
+                <td>
+                    <ul>
+                        <li>BR R1,R2,C</li>
+                        <li>BR R1</li>
+                        <li>BRNV R1</li>
+                        <li>BRZR R1,R2</li>
+                        <li>BRNZ R1,R2</li>
+                        <li>BRPL R1,R2</li>
+                        <li>BRMI R1,R2</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Branch to R1 if R2 = C<0..5></li>
+                        <li>Branch to R1</li>
+                        <li>Branch to R1 ... Never</li>
+                        <li>Branch to R1 if R2 = 0</li>
+                        <li>Branch to R1 if R2 != 0</li>
+                        <li>Branch to R1 if R2 >= 0</li>
+                        <li>Branch to R1 if R2 < 0</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>BRL</td>
+                <td>9</td>
+                <td>
+                    <ul>
+                        <li>BRL R1,R2,R3,C</li>
+                        <li>BRL R1,R2</li>
+                        <li>BRLNV R1,R2</li>
+                        <li>BRLZR R1,R2,R3</li>
+                        <li>BRLNZ R1,R2,R3</li>
+                        <li>BRLPL R1,R2,R3</li>
+                        <li>BRLMI R1,R2,R3</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>R1 = PC, Branch to R2 if R3 = C<0..5></li>
+                        <li>R1 = PC, Branch to R2</li>
+                        <li>R1 = PC, Branch to R2 ... Never</li>
+                        <li>R1 = PC, Branch to R2 if R3 = 0</li>
+                        <li>R1 = PC, Branch to R2 if R3 != 0</li>
+                        <li>R1 = PC, Branch to R2 if R3 >= 0</li>
+                        <li>R1 = PC, Branch to R2 if R3 < 0</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>ADD</td>
+                <td>12</td>
+                <td>ADD R1,R2,R3</td>
+                <td>Adds the value of R3 and R2 to R1</td>
+            </tr>
+            <tr>
+                <td>SUB</td>
+                <td>14</td>
+                <td>SUB R1,R2,R3</td>
+                <td>Subtracts the value of R3 from R2</td>
+            </tr>
+            <tr>
+                <td>NEG</td>
+                <td>15</td>
+                <td>NEG R1,R2</td>
+                <td>Negates the value of R2 and stores in R1</td>
+            </tr>
+            <tr>
+                <td>ADDI</td>
+                <td>13</td>
+                <td>ADDI R1,R2,10</td>
+                <td>Adds the value of R2 and 10 to R1</td>
+            </tr>
+            <tr>
+                <td>AND</td>
+                <td>20</td>
+                <td>AND R1,R2,R3</td>
+                <td>Performs bitwise AND on R2 and R3, saves the result in R1</td>
+            </tr>
+            <tr>
+                <td>ANDI</td>
+                <td>21</td>
+                <td>ANDI R1,R2,10</td>
+                <td>Performs bitwise AND on R2 and 10, saves the result in R1</td>
+            </tr>
+            <tr>
+                <td>OR</td>
+                <td>22</td>
+                <td>OR R1,R2,R3</td>
+                <td>Performs bitwise OR on R2 and R3, saves the result in R1</td>
+            </tr>
+            <tr>
+                <td>ORI</td>
+                <td>23</td>
+                <td>ORI R1,R2,10</td>
+                <td>Performs bitwise OR on R2 and 10, saves the result in R1</td>
+            </tr>
+            <tr>
+                <td>NOT</td>
+                <td>24</td>
+                <td>NOT R1,R2</td>
+                <td>Performs bitwise NOT on R2 and stores the result in R1</td>
+            </tr>
+            <tr>
+                <td>SHR</td>
+                <td>26</td>
+                <td>SHR R1,R2,R3 <br> SHR R1,R2,3 </td>
+                <td>Appends R3 times zeros to the MSB of R2 and stores the result in R1 <br> Appends 3 times zeros to the MSB of R2 and stores the result in R1</td>
+            </tr>
+            <tr>
+                <td>SHRA</td>
+                <td>27</td>
+                <td>SHRA R1,R2,R3 <br> SHRA R1,R2,3</td>
+                <td>Appends R3 times MSB to the MSB of R2 and stores the result in R1 <br> Appends 3 times MSB to the MSB of R2 and stores the result in R1</td>
+            </tr>
+            <tr>
+                <td>SHL</td>
+                <td>28</td>
+                <td>SHL R1,R2,R3 <br> SHL R1,R2,3</td>
+                <td>Appends R3 times zeros to the LSB of R2 and stores the result in R1 <br> Appends 3 times zeros to the LSB of R2 and stores the result in R1</td>
+            </tr>
+            <tr>
+                <td>SHC</td>
+                <td>29</td>
+                <td>SHC R1,R2,R3 <br> SHC R1,R2,3</td>
+                <td>Left rotates bitwise R2, R3 times and stores the result in R1 <br> Left rotates bitwise R2, 3 times and stores the result in R1</td>
+            </tr>
+            <tr>
+                <td>NOP</td>
+                <td>0</td>
+                <td>NOP</td>
+                <td>Wastes a few clock cycles, no effect in this simulator</td>
+            </tr>
+            <tr>
+                <td>STOP</td>
+                <td>31</td>
+                <td>STOP</td>
+                <td>Aborts the execution of the program</td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+        </div>
+    </div>
+    <div class="footer-basic">
+        <footer>
+            <p class="copyright">Simulator by thvardhan<br>Read more about this SRC&nbsp;<a href="http://www.iro.umontreal.ca/~dift1213/Slides/Ch02.pdf">Here</a>
+            or <a href="http://www.cs.virginia.edu/~cs333/notes/cs333_class5.pdf">Here</a></p>
+        </footer>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/codemirror.js"></script>
+    <script src="assets/js/default.js"></script>
+    <script src="assets/js/materialize.min.js"></script>
+    <script src="assets/js/implement.js"></script>
+    <script src="assets/js/engine.js"></script>
+</body>
+
+</html>
