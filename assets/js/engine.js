@@ -35,6 +35,11 @@ var R31 = $('#r31');
 */
 var BASE = 10;
 var INPUT_BASE = 10;
+var VERBOSE = true;
+
+function setVerbose() {
+    VERBOSE = !VERBOSE;
+}
 
 function resetSimulator() {
     for (var i = 0; i < 32; i++) {
@@ -150,6 +155,7 @@ function executeAssembly() {
 
 function handleCode(line) {
     incrementPC();
+    if(VERBOSE)
     appendToOutput("Fetching IR...");
     part = line.split(" ");
     operation = part[0];
@@ -177,6 +183,7 @@ function changeRegister(registerId,value) {
     try {
         str = registerId.trim().replace("#", "").toUpperCase() + " = " + value;
         $(registerId).text(value)
+        if(VERBOSE)
         appendToOutput(str)
     }catch (e) {
         appendToOutput("Error trying to change "+registerId.replace("#", "").toUpperCase())
@@ -199,7 +206,13 @@ function raiseError(errorInfo) {
 }
 
 function appendToOutput(string){
-    outputCode.replaceRange(string+"\n", CodeMirror.Pos(outputCode.lastLine()))
+
+    if(string.toLowerCase().includes("branching"))
+        if(VERBOSE)
+            outputCode.replaceRange(string+"\n", CodeMirror.Pos(outputCode.lastLine()))
+        else{}
+    else
+        outputCode.replaceRange(string+"\n", CodeMirror.Pos(outputCode.lastLine()))
 }
 
 function incrementPC() {
@@ -915,11 +928,7 @@ function subOperation(operands) {
             registerExists(operands[2])) {
             var twosCompStr = twosComplement('#' + operands[2],BASE);
             var newComp = convertBase(parseInt(twosCompStr,BASE),2);
-            console.log("b ="+newComp)
             a = pad(convertBase(getIntValue('#' + operands[1],BASE),2),32);
-            console.log("a ="+a)
-
-
             sum = addBin(a, newComp);
             if(sum.length === 33){
 
@@ -931,10 +940,8 @@ function subOperation(operands) {
             }
             else{
                 //result is negative
-                console.log("NO PARSE="+sum)
                 sum = parseInt(sum,2)
                 sum = convertBase(sum,BASE)
-                console.log("AFTER = "+sum)
                 changeRegisterCustom('#' + operands[0], sum, operands[0] + ' = ' + operands[1] + '-' + operands[2] + " <-- " +sum)
             }
         } else

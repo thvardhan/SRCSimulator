@@ -214,7 +214,10 @@ height:200px;max-height:300px">
                         <hr>
                         <div class="text-left"><textarea class="codemirror-textarea" style="height:55vh"></textarea></div>
                     </div>
-                </div><button class="btn btn-primary" onclick="executeAssembly()" type="button">Execute</button></div>
+                </div>
+                        <button class="btn btn-primary" onclick="executeAssembly()" type="button">Execute</button>
+
+            </div>
             <div class="col">
                 <div class="card">
                     <div class="card-body text-center">
@@ -223,8 +226,23 @@ height:200px;max-height:300px">
                         <hr>
                         <div class="text-left"><textarea class="codemirror-textarea-output"></textarea></div>
                     </div>
-                </div><button class="btn btn-primary" onclick="resetSimulator()" type="button">Reset</button></div>
+
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        <button class="btn btn-primary" onclick="resetSimulator()" type="button">Reset</button>
+
+                    </div><div class="col-7">
+                    <label>
+                        <input id="verbose" onclick="setVerbose()" type="checkbox" class="filled-in" checked="checked" />
+                        <span>Verbose Outlog</span>
+                    </label>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
 
         <p class="center-align">The "reset" button only resets the registers and the outlog. Memory persists! if you want to keep your values,
             then store them using "ST" commands. The memory will reset if you refresh your browser.</p>
