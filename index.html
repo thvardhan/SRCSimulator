@@ -15,7 +15,40 @@
 <body>
     <div class="container">
         <h3>SRC Simulator</h3>
+
         <hr>
+        <p class="center-align">This is a very simple RISC processor simulator to help students understand the basic concepts of
+        assembly language.
+            <br>
+            The supported command list is given below. Please check it before using the editor.
+
+        </p>
+
+        <div class="center-align">
+            <!-- Dropdown Trigger -->
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Base</a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown1' class='dropdown-content'>
+                <li><a onclick="setBaseBinary()" href="#!">Binary</a></li>
+                <li><a onclick="setBaseOctal()" href="#!">Octal</a></li>
+                <li><a onclick="setBaseDecimal()" href="#!">Decimal</a></li>
+                <li><a onclick="setBaseHex()" href="#!">Hex</a></li>
+            </ul>
+
+            <a class='dropdown-trigger btn' href='#' data-target='dropdown2'>Code Base</a>
+            <!-- Dropdown Structure -->
+            <ul id='dropdown2' class='dropdown-content'>
+                <li><a onclick="setInputBinary()" href="#!">Binary</a></li>
+                <li><a onclick="setInputOctal()" href="#!">Octal</a></li>
+                <li><a onclick="setInputDecimal()" href="#!">Decimal</a></li>
+                <li><a onclick="setInputHex()" href="#!">Hex</a></li>
+            </ul>
+
+        </div>
+
+
+
+
         <div class="row text-center">
             <div class="col">
                 <div class="card">
@@ -192,6 +225,11 @@ height:200px;max-height:300px">
                     </div>
                 </div><button class="btn btn-primary" onclick="resetSimulator()" type="button">Reset</button></div>
         </div>
+
+        <p class="center-align">The "reset" button only resets the registers and the outlog. Memory persists! if you want to keep your values,
+            then store them using "ST" commands. The memory will reset if you refresh your browser.</p>
+
+
         <div class="card">
             <div class="card-body text-center">
                 <h4 class="card-title">SRC Cheat Sheet</h4>
@@ -392,7 +430,7 @@ height:200px;max-height:300px">
     </div>
     <div class="footer-basic">
         <footer>
-            <p class="copyright">Simulator by thvardhan<br>Read more about this SRC&nbsp;<a href="http://www.iro.umontreal.ca/~dift1213/Slides/Ch02.pdf">Here</a>
+            <p class="copyright">Simulator by <a href="https://github.com/thvardhan">thvardhan</a><br>Read more about this SRC&nbsp;<a href="http://www.iro.umontreal.ca/~dift1213/Slides/Ch02.pdf">Here</a>
             or <a href="http://www.cs.virginia.edu/~cs333/notes/cs333_class5.pdf">Here</a></p>
         </footer>
     </div>
@@ -403,6 +441,17 @@ height:200px;max-height:300px">
     <script src="assets/js/materialize.min.js"></script>
     <script src="assets/js/implement.js"></script>
     <script src="assets/js/engine.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('.dropdown-trigger');
+            var instances = M.Dropdown.init(elems, options);
+        });
+
+        // Or with jQuery
+
+        $('.dropdown-trigger').dropdown();
+    </script>
 </body>
 
 </html>

@@ -33,11 +33,93 @@ var R29 = $('#r29');
 var R30 = $('#r30');
 var R31 = $('#r31');
 */
-var BASE = 2;
-var INPUT_BASE = 2;
+var BASE = 10;
+var INPUT_BASE = 10;
 
 function resetSimulator() {
+    for (var i = 0; i < 32; i++) {
+        $("#r"+i).text("0")
+    }
+    $("#ir").text("0")
+    $("#pc").text("0")
+    outputCode.setValue("");
+    outputCode.clearHistory();
+}
 
+function setInputBinary(){
+    INPUT_BASE = 2;
+}
+
+function setInputOctal(){
+    INPUT_BASE = 8;
+}
+
+function setInputDecimal(){
+    INPUT_BASE = 10;
+}
+
+function setInputHex(){
+    INPUT_BASE = 16;
+}
+
+function setBaseBinary() {
+    for (var i = 0; i < 32; i++) {
+        text = getIntValue("#r"+i,BASE)
+        n = convertBase(text,2)
+        $("#r"+i).text(n+"")
+    }
+    text = getIntValue("#ir",BASE)
+    n = convertBase(text,2)
+    $("#ir").text(n+"")
+    text = getIntValue("#pc",BASE)
+    n = convertBase(text,2)
+    $("#pc").text(n+"")
+    BASE = 2;
+}
+
+function setBaseOctal() {
+    for (var i = 0; i < 32; i++) {
+        text = getIntValue("#r"+i,BASE)
+        n = convertBase(text,8)
+        $("#r"+i).text(n+"")
+    }
+    text = getIntValue("#ir",BASE)
+    n = convertBase(text,8)
+    $("#ir").text(n+"")
+    text = getIntValue("#pc",BASE)
+    n = convertBase(text,8)
+    $("#pc").text(n+"")
+    BASE = 8;
+}
+
+function setBaseDecimal() {
+    for (var i = 0; i < 32; i++) {
+        text = getIntValue("#r"+i,BASE)
+        n = convertBase(text,10)
+        $("#r"+i).text(n+"")
+    }
+    text = getIntValue("#ir",BASE)
+    n = convertBase(text,10)
+    $("#ir").text(n+"")
+    text = getIntValue("#pc",BASE)
+    n = convertBase(text,10)
+    $("#pc").text(n+"")
+    BASE = 10;
+}
+
+function setBaseHex() {
+    for (var i = 0; i < 32; i++) {
+        text = getIntValue("#r"+i,BASE)
+        n = convertBase(text,16)
+        $("#r"+i).text(n+"")
+    }
+    text = getIntValue("#ir",BASE)
+    n = convertBase(text,16)
+    $("#ir").text(n+"")
+    text = getIntValue("#pc",BASE)
+    n = convertBase(text,16)
+    $("#pc").text(n+"")
+    BASE = 16;
 }
 
 
