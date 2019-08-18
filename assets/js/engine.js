@@ -147,16 +147,67 @@ function executeAssembly() {
         if(stopRaised){
             break;
         }
-        changeRegister('#ir',$('#pc').text());
-        handleCode(code[parseInt($('#ir').text(),BASE)-1]);
+
+        handleCode(code[parseInt($('#pc').text(),BASE)-1]);
     }
     // changeRegister("#pc",1);
 }
 
+function getFinalCode(operation,operands) {
+    opCode = convertBase(getOpCode(operation),2)
+    cmd = pad(opCode,6);
+    c = operands.length;
+    for(var i=0;i<c;i++){
+        k = operands[i].replace("r","")
+        dat = parseInt(k,INPUT_BASE)
+        cmd += pad(convertBase(dat,2),6)
+    }
+    cmd = padR(cmd,32);
+    if(cmd.length>32)
+        appendToOutput("Warning : IR exceeds 32 bits! the command wont run on real machine!")
+
+    if(BASE == 2)
+        return cmd
+
+    csd = parseInt(cmd,2)
+    return convertBase(csd,BASE)
+
+}
+
+function getOpCode(operation) {
+    switch (operation.toLowerCase()) {
+        case "ld" : return 1;
+        case "ldr" : return 2;
+        case "la" : return 5;
+        case "lar" : return 6;
+        case "st" : return 3;
+        case "str" : return 4;
+        case "br" : return 8;
+        case "brl" : return 9;
+        case "add" : return 12;
+        case "sub" : return 14;
+        case "neg" : return 15;
+        case "addi" : return 13;
+        case "and" : return 20;
+        case "andi" : return 21;
+        case "or" : return 22;
+        case "ori" : return 23;
+        case "not" : return 24;
+        case "shr" : return 26;
+        case "shra" : return 27;
+        case "shl" : return 28;
+        case "shc" : return 29;
+        case "nop" : return 0;
+        case "stop" : return 31;
+    }
+}
+
+
 function handleCode(line) {
     incrementPC();
     if(VERBOSE)
-    appendToOutput("Fetching IR...");
+    appendToOutput("Fetching PC...");
+
     part = line.split(" ");
     operation = part[0];
     if(part.length>1)
@@ -174,6 +225,9 @@ function handleCode(line) {
     if(operands.length > 3 && !operation.startsWith("brl")){
         raiseError("Unsupported more than 3 bit addressing...");
     }
+    pc = $('#pc').text()
+    changeRegister('#ir',getFinalCode(operation,operands));
+
     //everything seems okay so far...
     handleCommand(operation,operands);
 }
@@ -957,5 +1011,11 @@ function convertBase(num,base){
 function pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
+    return s;
+}
+
+function padR(num, size) {
+    var s = num+"";
+    while (s.length < size) s = s+ "0" ;
     return s;
 }
